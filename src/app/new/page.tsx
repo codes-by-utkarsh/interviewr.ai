@@ -2,6 +2,7 @@
 import { useState, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import Navbar from '@/components/Navbar';
+import { UploadCloud, CheckCircle2, AlertCircle, ArrowRight, Info, FileText, Sparkles, Video } from 'lucide-react';
 
 export default function NewInterviewPage() {
   const router = useRouter();
@@ -49,205 +50,192 @@ export default function NewInterviewPage() {
   };
 
   return (
-    <div style={{ minHeight: '100vh' }}>
+    <div style={{ minHeight: '100vh', background: '#faf5ef' }}>
       <Navbar />
 
       <div
         style={{
-          maxWidth: '720px',
+          maxWidth: '760px',
           margin: '0 auto',
           padding: '48px 24px',
         }}
       >
         {/* Header */}
-        <div style={{ marginBottom: '48px' }}>
-          <div className="badge badge-purple" style={{ marginBottom: '16px' }}>
-            🎙️ New Interview Session
+        <div style={{ marginBottom: '40px', textAlign: 'center' }}>
+          <div className="badge badge-yellow" style={{ marginBottom: '16px', display: 'inline-flex' }}>
+            <Sparkles size={14} /> HirePro AI Evaluator Setup
           </div>
           <h1
             style={{
               fontSize: '36px',
               fontWeight: 800,
+              color: '#0f172a',
               letterSpacing: '-0.03em',
               marginBottom: '12px',
             }}
           >
-            Set Up Your Interview
+            Configure Your Mock Interview
           </h1>
-          <p style={{ color: 'var(--text-secondary)', fontSize: '15px', lineHeight: 1.7 }}>
-            Upload your resume (optional but recommended) and paste the job description or topic syllabus. The AI will tailor every question to your profile.
+          <p style={{ color: '#475569', fontSize: '16px', lineHeight: 1.7, maxWidth: 600, margin: '0 auto' }}>
+            Upload candidate resume and job specs. The AI hiring partner will generate specialized domain questions for your video call.
           </p>
         </div>
 
-        <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '28px' }}>
-          {/* Role title */}
-          <div>
-            <label
-              htmlFor="role-title"
-              style={{ display: 'block', fontSize: '14px', fontWeight: 600, marginBottom: '8px', color: 'var(--text-secondary)' }}
-            >
-              Role / Topic Label <span style={{ color: 'var(--text-muted)' }}>(optional)</span>
-            </label>
-            <input
-              id="role-title"
-              type="text"
-              className="input-field"
-              placeholder="e.g. Senior React Developer, Cognizant DN 5.0, Python Backend Intern"
-              value={roleTitle}
-              onChange={(e) => setRoleTitle(e.target.value)}
-            />
-            <p style={{ marginTop: '6px', fontSize: '12px', color: 'var(--text-muted)' }}>
-              Used as a label in your dashboard history.
-            </p>
-          </div>
-
-          {/* Resume upload */}
-          <div>
-            <label
-              style={{ display: 'block', fontSize: '14px', fontWeight: 600, marginBottom: '8px', color: 'var(--text-secondary)' }}
-            >
-              Resume <span style={{ color: 'var(--text-muted)' }}>(PDF, DOCX, or TXT)</span>
-            </label>
-            <div
-              onDragOver={(e) => { e.preventDefault(); setDragOver(true); }}
-              onDragLeave={() => setDragOver(false)}
-              onDrop={handleFileDrop}
-              onClick={() => fileInputRef.current?.click()}
-              style={{
-                border: `2px dashed ${dragOver ? 'var(--accent-purple)' : 'var(--border)'}`,
-                borderRadius: '12px',
-                padding: '32px',
-                textAlign: 'center',
-                cursor: 'pointer',
-                transition: 'all 0.2s',
-                background: dragOver ? 'rgba(139,92,246,0.05)' : 'var(--bg-secondary)',
-              }}
-            >
+        <div className="glass-card" style={{ padding: '36px 32px' }}>
+          <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '28px' }}>
+            {/* Role title */}
+            <div>
+              <label
+                htmlFor="role-title"
+                style={{ display: 'block', fontSize: '14px', fontWeight: 700, marginBottom: '8px', color: '#0f172a' }}
+              >
+                Target Role Title / Topic Label <span style={{ color: '#64748b', fontWeight: 400 }}>(optional)</span>
+              </label>
               <input
-                ref={fileInputRef}
-                type="file"
-                id="resume-upload"
-                accept=".pdf,.docx,.txt"
-                style={{ display: 'none' }}
-                onChange={(e) => {
-                  const file = e.target.files?.[0];
-                  if (file) setResumeFile(file);
-                }}
+                id="role-title"
+                type="text"
+                className="input-field"
+                placeholder="e.g. Senior Full Stack Engineer, System Design, Cognizant DN 5.0"
+                value={roleTitle}
+                onChange={(e) => setRoleTitle(e.target.value)}
               />
-              {resumeFile ? (
-                <div>
-                  <div style={{ fontSize: '32px', marginBottom: '8px' }}>✅</div>
-                  <div style={{ fontWeight: 600, fontSize: '15px', color: 'var(--accent-green)' }}>
-                    {resumeFile.name}
-                  </div>
-                  <div style={{ fontSize: '12px', color: 'var(--text-muted)', marginTop: '4px' }}>
-                    {(resumeFile.size / 1024).toFixed(0)} KB · Click to change
-                  </div>
-                </div>
-              ) : (
-                <div>
-                  <div style={{ fontSize: '40px', marginBottom: '12px' }}>📎</div>
-                  <div style={{ fontWeight: 600, fontSize: '15px', marginBottom: '6px' }}>
-                    Drop your resume here
-                  </div>
-                  <div style={{ fontSize: '13px', color: 'var(--text-muted)' }}>
-                    or click to browse · PDF, DOCX, TXT
-                  </div>
-                </div>
-              )}
+              <p style={{ marginTop: '6px', fontSize: '12px', color: '#64748b' }}>
+                Used as a reference tag in your evaluation report dashboard.
+              </p>
             </div>
-            <p style={{ marginTop: '8px', fontSize: '12px', color: 'var(--text-muted)' }}>
-              Without a resume, the AI will focus entirely on the job description / topic below.
-            </p>
-          </div>
 
-          {/* JD / Topic */}
-          <div>
-            <label
-              htmlFor="jd-text"
-              style={{ display: 'block', fontSize: '14px', fontWeight: 600, marginBottom: '8px', color: 'var(--text-secondary)' }}
-            >
-              Job Description / Topic Syllabus <span style={{ color: '#ef4444' }}>*</span>
-            </label>
-            <textarea
-              id="jd-text"
-              className="input-field"
-              placeholder="Paste the job description, or a topic/syllabus (e.g. Cognizant DN 5.0 handbook, Data Structures & Algorithms topics, System Design concepts)..."
-              value={jdText}
-              onChange={(e) => setJdText(e.target.value)}
-              style={{ minHeight: '200px' }}
-              required
-            />
-            <p style={{ marginTop: '6px', fontSize: '12px', color: 'var(--text-muted)' }}>
-              Paste as much detail as you have — the more context, the better the questions.
-            </p>
-          </div>
-
-          {/* Interview type info */}
-          <div
-            style={{
-              background: 'rgba(139,92,246,0.07)',
-              border: '1px solid rgba(139,92,246,0.15)',
-              borderRadius: '12px',
-              padding: '16px 20px',
-              fontSize: '13px',
-              color: 'var(--text-secondary)',
-              lineHeight: 1.7,
-            }}
-          >
-            <span style={{ color: '#a78bfa', fontWeight: 700 }}>ℹ️ What to expect: </span>
-            The AI interviewer will greet you, ask for an introduction, probe your resume projects, ask 4–6 technical questions from the JD, do adaptive follow-ups, then close naturally. The session usually takes 10–20 minutes. When you're done, you'll get a full scored report.
-          </div>
-
-          {error && (
-            <div
-              style={{
-                background: 'rgba(239,68,68,0.1)',
-                border: '1px solid rgba(239,68,68,0.25)',
-                borderRadius: '10px',
-                padding: '12px 16px',
-                color: '#f87171',
-                fontSize: '14px',
-              }}
-            >
-              ⚠️ {error}
-            </div>
-          )}
-
-          <button
-            type="submit"
-            className="btn-primary"
-            disabled={loading}
-            style={{ width: '100%', justifyContent: 'center', padding: '16px', fontSize: '16px' }}
-            id="start-interview-btn"
-          >
-            {loading ? (
-              <>
-                <span
-                  style={{
-                    width: '18px',
-                    height: '18px',
-                    border: '2px solid rgba(255,255,255,0.3)',
-                    borderTopColor: 'white',
-                    borderRadius: '50%',
-                    display: 'inline-block',
-                    animation: 'spin 0.7s linear infinite',
+            {/* Resume upload */}
+            <div>
+              <label
+                style={{ display: 'block', fontSize: '14px', fontWeight: 700, marginBottom: '8px', color: '#0f172a' }}
+              >
+                Candidate Resume <span style={{ color: '#64748b', fontWeight: 400 }}>(PDF, DOCX, or TXT)</span>
+              </label>
+              <label
+                onDragOver={(e) => { e.preventDefault(); setDragOver(true); }}
+                onDragLeave={() => setDragOver(false)}
+                onDrop={handleFileDrop}
+                htmlFor="resume-upload"
+                style={{
+                  border: `2px dashed ${dragOver ? '#f59e0b' : '#cbd5e1'}`,
+                  borderRadius: '16px',
+                  padding: '32px',
+                  textAlign: 'center',
+                  cursor: 'pointer',
+                  transition: 'all 0.2s',
+                  background: dragOver ? '#fef3c7' : '#fdfbf7',
+                  display: 'block',
+                }}
+              >
+                <input
+                  ref={fileInputRef}
+                  type="file"
+                  id="resume-upload"
+                  accept=".pdf,.docx,.txt"
+                  style={{ display: 'none' }}
+                  onChange={(e) => {
+                    const file = e.target.files?.[0];
+                    if (file) setResumeFile(file);
                   }}
                 />
-                Setting up your interview...
-              </>
-            ) : (
-              '🎙️ Start Interview'
-            )}
-          </button>
-        </form>
-      </div>
+                {resumeFile ? (
+                  <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8 }}>
+                    <CheckCircle2 size={36} color="#059669" />
+                    <div style={{ fontWeight: 700, fontSize: '16px', color: '#059669' }}>
+                      {resumeFile.name}
+                    </div>
+                    <div style={{ fontSize: '12px', color: '#64748b' }}>
+                      {(resumeFile.size / 1024).toFixed(0)} KB · Click to change file
+                    </div>
+                  </div>
+                ) : (
+                  <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8 }}>
+                    <UploadCloud size={42} color="#f59e0b" />
+                    <div style={{ fontWeight: 700, fontSize: '16px', color: '#0f172a' }}>
+                      Click to upload resume PDF
+                    </div>
+                    <div style={{ fontSize: '13px', color: '#64748b' }}>
+                      or drag and drop your file here
+                    </div>
+                  </div>
+                )}
+              </label>
+            </div>
 
-      <style>{`
-        @keyframes spin {
-          to { transform: rotate(360deg); }
-        }
-      `}</style>
+            {/* JD / Topic */}
+            <div>
+              <label
+                htmlFor="jd-text"
+                style={{ display: 'block', fontSize: '14px', fontWeight: 700, marginBottom: '8px', color: '#0f172a' }}
+              >
+                Job Description / Syllabus Content <span style={{ color: '#e11d48' }}>*</span>
+              </label>
+              <textarea
+                id="jd-text"
+                className="input-field"
+                placeholder="Paste the job description or assessment syllabus here..."
+                value={jdText}
+                onChange={(e) => setJdText(e.target.value)}
+                style={{ minHeight: '180px' }}
+                required
+              />
+            </div>
+
+            {/* Info box */}
+            <div
+              style={{
+                background: '#fef3c7',
+                border: '1px solid #fde68a',
+                borderRadius: '12px',
+                padding: '16px 20px',
+                fontSize: '13px',
+                color: '#92400e',
+                lineHeight: 1.6,
+                display: 'flex',
+                gap: 12,
+                alignItems: 'flex-start',
+              }}
+            >
+              <Info size={20} color="#f59e0b" style={{ flexShrink: 0, marginTop: 2 }} />
+              <div>
+                <strong style={{ fontWeight: 700 }}>Assessment Process:</strong> Clicking below launches a live 1:1 video call with Alex (HirePro AI Recruiter). Once completed, you will receive your full competency evaluation.
+              </div>
+            </div>
+
+            {error && (
+              <div
+                style={{
+                  background: '#ffe4e6',
+                  border: '1px solid #fecdd3',
+                  borderRadius: '10px',
+                  padding: '12px 16px',
+                  color: '#9f1239',
+                  fontSize: '14px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: 8,
+                }}
+              >
+                <AlertCircle size={18} /> {error}
+              </div>
+            )}
+
+            <button
+              type="submit"
+              className="btn-navy"
+              disabled={loading}
+              style={{ width: '100%', justifyContent: 'center', padding: '16px', fontSize: '16px', borderRadius: '999px' }}
+              id="start-interview-btn"
+            >
+              {loading ? 'Initializing Video Call...' : (
+                <>
+                  <Video size={18} /> Start Video Call Assessment <ArrowRight size={18} />
+                </>
+              )}
+            </button>
+          </form>
+        </div>
+      </div>
     </div>
   );
 }

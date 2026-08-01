@@ -2,6 +2,7 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Navbar from '@/components/Navbar';
+import { Video, BarChart3, Clock, CheckCircle2, ArrowRight, Plus, Play, Sparkles } from 'lucide-react';
 
 interface SessionSummary {
   id: string;
@@ -12,11 +13,11 @@ interface SessionSummary {
   ended_at: string | null;
 }
 
-const STATUS_CONFIG: Record<string, { label: string; badge: string; emoji: string }> = {
-  created: { label: 'Not Started', badge: 'badge-amber', emoji: '⏳' },
-  in_progress: { label: 'In Progress', badge: 'badge-cyan', emoji: '🔴' },
-  completed: { label: 'Completed', badge: 'badge-purple', emoji: '✅' },
-  analyzed: { label: 'Report Ready', badge: 'badge-green', emoji: '📊' },
+const STATUS_CONFIG: Record<string, { label: string; badge: string }> = {
+  created: { label: 'Not Started', badge: 'badge-yellow' },
+  in_progress: { label: 'In Progress', badge: 'badge-navy' },
+  completed: { label: 'Completed', badge: 'badge-green' },
+  analyzed: { label: 'Report Ready', badge: 'badge-green' },
 };
 
 function SessionCard({ session }: { session: SessionSummary }) {
@@ -44,7 +45,6 @@ function SessionCard({ session }: { session: SessionSummary }) {
         alignItems: 'center',
         gap: '20px',
         flexWrap: 'wrap',
-        cursor: 'pointer',
       }}
     >
       {/* Icon */}
@@ -53,24 +53,25 @@ function SessionCard({ session }: { session: SessionSummary }) {
           width: '48px',
           height: '48px',
           borderRadius: '12px',
-          background: 'linear-gradient(135deg, rgba(139,92,246,0.2), rgba(6,182,212,0.1))',
-          border: '1px solid rgba(139,92,246,0.2)',
+          background: '#fef3c7',
+          border: '1px solid #fde68a',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          fontSize: '22px',
+          color: '#d97706',
           flexShrink: 0,
         }}
       >
-        🎙️
+        <Video size={24} />
       </div>
 
       {/* Info */}
       <div style={{ flex: 1, minWidth: '160px' }}>
-        <div style={{ fontWeight: 700, fontSize: '16px', marginBottom: '4px' }}>
-          {session.role_title || 'Untitled Interview'}
+        <div style={{ fontWeight: 700, fontSize: '16px', color: '#0f172a', marginBottom: '4px' }}>
+          {session.role_title || 'Untitled Assessment Call'}
         </div>
-        <div style={{ fontSize: '13px', color: 'var(--text-muted)' }}>
+        <div style={{ fontSize: '13px', color: '#64748b', display: 'flex', alignItems: 'center', gap: 6 }}>
+          <Clock size={14} />
           {dateStr} at {timeStr}
           {duration && <span style={{ marginLeft: '10px' }}>· {duration}</span>}
         </div>
@@ -78,7 +79,7 @@ function SessionCard({ session }: { session: SessionSummary }) {
 
       {/* Status */}
       <div className={`badge ${cfg.badge}`} style={{ flexShrink: 0 }}>
-        {cfg.emoji} {cfg.label}
+        <CheckCircle2 size={14} /> {cfg.label}
       </div>
 
       {/* Action */}
@@ -87,28 +88,26 @@ function SessionCard({ session }: { session: SessionSummary }) {
           <Link
             href={`/report/${session.id}`}
             className="btn-primary"
-            style={{ padding: '8px 16px', fontSize: '13px' }}
+            style={{ padding: '8px 18px', fontSize: '13px' }}
           >
-            View Report
+            View Evaluation <ArrowRight size={14} />
           </Link>
         ) : session.status === 'in_progress' ? (
           <Link
             href={`/interview/${session.id}`}
-            className="btn-ghost"
-            style={{ padding: '8px 16px', fontSize: '13px' }}
+            className="btn-navy"
+            style={{ padding: '8px 18px', fontSize: '13px' }}
           >
-            Resume →
-          </Link>
-        ) : session.status === 'created' ? (
-          <Link
-            href={`/interview/${session.id}`}
-            className="btn-ghost"
-            style={{ padding: '8px 16px', fontSize: '13px' }}
-          >
-            Start →
+            Resume Call <Play size={14} />
           </Link>
         ) : (
-          <span style={{ fontSize: '13px', color: 'var(--text-muted)' }}>Processing...</span>
+          <Link
+            href={`/interview/${session.id}`}
+            className="btn-navy"
+            style={{ padding: '8px 18px', fontSize: '13px' }}
+          >
+            Start Call <Play size={14} />
+          </Link>
         )}
       </div>
     </div>
@@ -138,10 +137,10 @@ export default function DashboardPage() {
   const inProgress = sessions.filter((s) => s.status === 'in_progress').length;
 
   return (
-    <div style={{ minHeight: '100vh' }}>
+    <div style={{ minHeight: '100vh', background: '#faf5ef' }}>
       <Navbar />
 
-      <div style={{ maxWidth: '900px', margin: '0 auto', padding: '48px 24px 80px' }}>
+      <div style={{ maxWidth: '960px', margin: '0 auto', padding: '48px 24px 80px' }}>
         {/* Header */}
         <div
           style={{
@@ -154,15 +153,18 @@ export default function DashboardPage() {
           }}
         >
           <div>
-            <h1 style={{ fontSize: '36px', fontWeight: 800, letterSpacing: '-0.03em', marginBottom: '8px' }}>
-              Dashboard
+            <div className="badge badge-yellow" style={{ marginBottom: 12 }}>
+              <Sparkles size={14} /> Candidate Evaluation Dashboard
+            </div>
+            <h1 style={{ fontSize: '36px', fontWeight: 800, color: '#0f172a', letterSpacing: '-0.03em', marginBottom: '8px' }}>
+              Assessment Dashboard
             </h1>
-            <p style={{ color: 'var(--text-secondary)', fontSize: '15px' }}>
-              Your interview practice history
+            <p style={{ color: '#475569', fontSize: '15px' }}>
+              Your technical video call assessment history and performance reports
             </p>
           </div>
           <Link href="/new" className="btn-primary" id="new-session-btn">
-            + New Interview
+            <Plus size={18} /> New Assessment
           </Link>
         </div>
 
@@ -170,22 +172,29 @@ export default function DashboardPage() {
         <div
           style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fill, minmax(160px, 1fr))',
-            gap: '16px',
+            gridTemplateColumns: 'repeat(auto-fill, minmax(240px, 1fr))',
+            gap: '20px',
             marginBottom: '40px',
           }}
         >
           {[
-            { label: 'Total Sessions', value: sessions.length, emoji: '🎙️', badge: 'badge-purple' },
-            { label: 'Completed', value: analyzed, emoji: '📊', badge: 'badge-green' },
-            { label: 'In Progress', value: inProgress, emoji: '🔴', badge: 'badge-cyan' },
-          ].map((stat) => (
-            <div key={stat.label} className="glass-card" style={{ padding: '20px', textAlign: 'center' }}>
-              <div style={{ fontSize: '28px', marginBottom: '8px' }}>{stat.emoji}</div>
-              <div style={{ fontSize: '28px', fontWeight: 800, marginBottom: '4px' }}>{stat.value}</div>
-              <div style={{ fontSize: '12px', color: 'var(--text-muted)' }}>{stat.label}</div>
-            </div>
-          ))}
+            { label: 'Total Assessments', value: sessions.length, icon: Video, color: '#f59e0b', bg: '#fef3c7' },
+            { label: 'Reports Ready', value: analyzed, icon: BarChart3, color: '#059669', bg: '#d1fae5' },
+            { label: 'In Progress', value: inProgress, icon: Clock, color: '#2563eb', bg: '#dbeafe' },
+          ].map((stat) => {
+            const Icon = stat.icon;
+            return (
+              <div key={stat.label} className="glass-card" style={{ padding: '24px', display: 'flex', alignItems: 'center', gap: 16 }}>
+                <div style={{ width: 52, height: 52, borderRadius: 14, background: stat.bg, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                  <Icon size={26} color={stat.color} />
+                </div>
+                <div>
+                  <div style={{ fontSize: '28px', fontWeight: 800, color: '#0f172a' }}>{stat.value}</div>
+                  <div style={{ fontSize: '13px', color: '#64748b', fontWeight: 600 }}>{stat.label}</div>
+                </div>
+              </div>
+            );
+          })}
         </div>
 
         {/* Sessions list */}
@@ -207,21 +216,23 @@ export default function DashboardPage() {
               textAlign: 'center',
             }}
           >
-            <div style={{ fontSize: '60px', marginBottom: '20px' }}>🎙️</div>
-            <h2 style={{ fontSize: '24px', fontWeight: 700, marginBottom: '12px' }}>
-              No interviews yet
+            <div style={{ width: 72, height: 72, borderRadius: '50%', background: '#fef3c7', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 20px' }}>
+              <Video size={36} color="#f59e0b" />
+            </div>
+            <h2 style={{ fontSize: '24px', fontWeight: 800, color: '#0f172a', marginBottom: '12px' }}>
+              No assessment calls yet
             </h2>
-            <p style={{ color: 'var(--text-secondary)', marginBottom: '28px', fontSize: '15px' }}>
-              Start your first mock interview to see results here
+            <p style={{ color: '#475569', marginBottom: '28px', fontSize: '15px' }}>
+              Start your first video call assessment to receive detailed domain performance reports.
             </p>
             <Link href="/new" className="btn-primary" style={{ padding: '14px 32px' }}>
-              Start Your First Interview
+              Start Your First Assessment
             </Link>
           </div>
         ) : (
           <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-            <h2 style={{ fontSize: '16px', fontWeight: 600, color: 'var(--text-secondary)', marginBottom: '4px' }}>
-              Recent Sessions
+            <h2 style={{ fontSize: '16px', fontWeight: 700, color: '#0f172a', marginBottom: '4px' }}>
+              Recent Assessment Calls
             </h2>
             {sessions.map((session) => (
               <SessionCard key={session.id} session={session} />

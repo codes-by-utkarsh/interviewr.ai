@@ -44,7 +44,29 @@ export async function POST(request: NextRequest) {
       }
     }
 
-    // ── 2. OpenAI Whisper ─────────────────────────────────────────────────────
+    // ── 2. Groq Whisper (free & ultra-fast) ──────────────────────────────────
+    if (hasKey(process.env.GROQ_API_KEY)) {
+      try {
+        const { Groq } = await import('groq-sdk');
+        const groq = new Groq({ apiKey: process.env.GROQ_API_KEY });
+        const ext = mimeType.includes('mp4') ? 'mp4' : mimeType.includes('ogg') ? 'ogg' : 'webm';
+        const file = new File([audioBuffer], `recording.${ext}`, { type: mimeType });
+        const result = await groq.audio.transcriptions.create({
+          file,
+          model: 'whisper-large-v3-turbo',
+          language: 'en',
+        });
+        if (result.text?.trim()) {
+          return NextResponse.json({ transcript: result.text, provider: 'groq-whisper' });
+        }
+        throw new Error('Groq Whisper returned empty transcript');
+      } catch (err) {
+        errors.push(`Groq Whisper: ${(err as Error).message}`);
+        console.warn('[STT] Groq Whisper failed, trying OpenAI Whisper…');
+      }
+    }
+
+    // ── 3. OpenAI Whisper ─────────────────────────────────────────────────────
     if (hasKey(process.env.OPENAI_API_KEY)) {
       try {
         const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });

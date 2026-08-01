@@ -1,313 +1,282 @@
 'use client';
 import Link from 'next/link';
 import Navbar from '@/components/Navbar';
-
-const features = [
-  {
-    icon: '🧠',
-    title: 'Adaptive AI Interviewer',
-    desc: 'Claude-powered interviewer that adapts to your answers — probes weak spots, raises difficulty on strong answers, and follows up naturally.',
-  },
-  {
-    icon: '📄',
-    title: 'Resume + JD Grounded',
-    desc: 'Upload your resume and paste the job description. Every question is grounded in your actual experience and the role requirements.',
-  },
-  {
-    icon: '💬',
-    title: 'Text & Voice Modes',
-    desc: 'Start with text-based practice, then upgrade to full voice conversation with AI-generated speech and real-time transcription.',
-  },
-  {
-    icon: '📊',
-    title: 'Detailed Score Report',
-    desc: 'Get a comprehensive post-interview report: overall score, category breakdowns, specific strengths, and improvement areas with example answers.',
-  },
-  {
-    icon: '📈',
-    title: 'Progress Tracking',
-    desc: 'See your score trend over multiple sessions. Track improvement across Communication, Technical Depth, Problem-Solving, and more.',
-  },
-  {
-    icon: '⚡',
-    title: 'Streaming Responses',
-    desc: "Responses stream in real-time — no waiting for the AI to finish thinking before you see the next question. Feels like a real conversation.",
-  },
-];
-
-const stats = [
-  { value: '5+', label: 'Question Categories' },
-  { value: '∞', label: 'Practice Sessions' },
-  { value: '< 1min', label: 'Setup Time' },
-  { value: '100%', label: 'Private & Secure' },
-];
+import {
+  Sparkles,
+  Bot,
+  Mic,
+  Award,
+  BarChart3,
+  CheckCircle2,
+  ArrowRight,
+  ShieldCheck,
+  Zap,
+  Users,
+  Target,
+  FileCheck2
+} from 'lucide-react';
 
 export default function HomePage() {
   return (
-    <div style={{ minHeight: '100vh' }}>
+    <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', background: '#faf5ef' }}>
       <Navbar />
 
-      {/* Hero */}
-      <section
-        style={{
-          padding: '100px 24px 80px',
-          textAlign: 'center',
-          position: 'relative',
-          overflow: 'hidden',
-        }}
-      >
-        {/* Background glow blobs */}
-        <div
-          style={{
-            position: 'absolute',
-            top: '10%',
-            left: '50%',
-            transform: 'translateX(-50%)',
-            width: '600px',
-            height: '300px',
-            background: 'radial-gradient(ellipse, rgba(139,92,246,0.12) 0%, transparent 70%)',
-            pointerEvents: 'none',
-          }}
-        />
-        <div
-          style={{
-            position: 'absolute',
-            top: '30%',
-            left: '20%',
-            width: '300px',
-            height: '300px',
-            background: 'radial-gradient(ellipse, rgba(6,182,212,0.07) 0%, transparent 70%)',
-            pointerEvents: 'none',
-          }}
-        />
-
-        <div style={{ position: 'relative', maxWidth: '780px', margin: '0 auto' }}>
-          <div
-            style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '8px',
-              padding: '6px 16px',
-              background: 'rgba(139,92,246,0.1)',
-              border: '1px solid rgba(139,92,246,0.25)',
-              borderRadius: '999px',
-              fontSize: '13px',
-              color: '#a78bfa',
-              fontWeight: 600,
-              marginBottom: '32px',
-              letterSpacing: '0.03em',
-            }}
-          >
-            <span>✨</span>
-            Powered by Claude AI
-          </div>
-
-          <h1
-            style={{
-              fontSize: 'clamp(40px, 6vw, 72px)',
-              fontWeight: 800,
-              lineHeight: 1.1,
-              marginBottom: '24px',
-              letterSpacing: '-0.03em',
-            }}
-          >
-            Ace Your Next Interview with{' '}
-            <span className="gradient-text">AI-Powered</span> Practice
-          </h1>
-
-          <p
-            style={{
-              fontSize: '18px',
-              color: 'var(--text-secondary)',
-              lineHeight: 1.7,
-              marginBottom: '48px',
-              maxWidth: '560px',
-              margin: '0 auto 48px',
-            }}
-          >
-            Upload your resume, paste the job description, and have a live adaptive mock interview with an AI that thinks like a real interviewer. Get a detailed report instantly.
-          </p>
-
-          <div style={{ display: 'flex', gap: '16px', justifyContent: 'center', flexWrap: 'wrap' }}>
-            <Link href="/new" className="btn-primary" style={{ padding: '14px 32px', fontSize: '16px' }}>
-              🎙️ Start a Mock Interview
-            </Link>
-            <Link href="/dashboard" className="btn-ghost" style={{ padding: '14px 28px', fontSize: '15px' }}>
-              View Dashboard →
-            </Link>
-          </div>
-        </div>
-
-        {/* Stats row */}
-        <div
-          style={{
-            display: 'flex',
-            gap: '32px',
-            justifyContent: 'center',
-            marginTop: '80px',
-            flexWrap: 'wrap',
-          }}
-        >
-          {stats.map((stat) => (
-            <div key={stat.label} style={{ textAlign: 'center' }}>
-              <div
-                style={{
-                  fontSize: '32px',
-                  fontWeight: 800,
-                  background: 'linear-gradient(135deg, #a78bfa, #22d3ee)',
-                  WebkitBackgroundClip: 'text',
-                  WebkitTextFillColor: 'transparent',
-                  backgroundClip: 'text',
-                }}
-              >
-                {stat.value}
-              </div>
-              <div style={{ fontSize: '13px', color: 'var(--text-muted)', marginTop: '4px' }}>
-                {stat.label}
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* How it works */}
-      <section style={{ padding: '60px 24px', maxWidth: '900px', margin: '0 auto' }}>
-        <h2
-          style={{
-            fontSize: '32px',
-            fontWeight: 700,
-            textAlign: 'center',
-            marginBottom: '48px',
-            letterSpacing: '-0.02em',
-          }}
-        >
-          How It Works
-        </h2>
-
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '0' }}>
-          {[
-            {
-              step: '01',
-              title: 'Upload & Setup',
-              desc: 'Upload your resume (PDF/DOCX) and paste the job description or topic syllabus. Takes under a minute.',
-              icon: '📎',
-            },
-            {
-              step: '02',
-              title: 'Live Interview',
-              desc: 'Chat (or speak) with the AI interviewer in real time. It adapts to your answers, follows up on weak points, and mimics a real hiring manager.',
-              icon: '💬',
-            },
-            {
-              step: '03',
-              title: 'Get Your Report',
-              desc: 'After the session, receive a full analysis: overall score, category breakdown, quoted strengths, improvement areas with example answers.',
-              icon: '📊',
-            },
-          ].map((item, i) => (
+      {/* Hero Section matching HirePro screenshot */}
+      <section style={{ padding: '60px 32px 80px', maxWidth: 1280, margin: '0 auto', width: '100%' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: '1.1fr 0.9fr', gap: 48, alignItems: 'center' }}>
+          
+          {/* Left Column: Typography matching screenshot */}
+          <div>
             <div
-              key={item.step}
               style={{
-                display: 'flex',
-                gap: '24px',
-                padding: '32px 0',
-                borderBottom: i < 2 ? '1px solid var(--border)' : 'none',
-                alignItems: 'flex-start',
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: 8,
+                background: '#ffffff',
+                border: '1px solid #e2d9cd',
+                padding: '8px 18px',
+                borderRadius: 999,
+                fontSize: 13,
+                fontWeight: 700,
+                color: '#0f172a',
+                marginBottom: 28,
+                boxShadow: '0 2px 8px rgba(0,0,0,0.03)',
               }}
             >
-              <div
+              <Sparkles size={16} color="#f59e0b" /> Powered by Enterprise AI Assessment Engine
+            </div>
+
+            <h1
+              style={{
+                fontSize: '60px',
+                fontWeight: 800,
+                color: '#0f172a',
+                lineHeight: 1.1,
+                letterSpacing: '-0.03em',
+                marginBottom: 24,
+                fontFamily: 'Plus Jakarta Sans, sans-serif',
+              }}
+            >
+              FEARLESS <br />
+              <span
                 style={{
-                  width: '56px',
-                  height: '56px',
-                  borderRadius: '16px',
-                  background: 'linear-gradient(135deg, rgba(139,92,246,0.2), rgba(6,182,212,0.1))',
-                  border: '1px solid rgba(139,92,246,0.2)',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  fontSize: '24px',
-                  flexShrink: 0,
+                  display: 'inline-block',
+                  background: '#1e1b4b',
+                  color: '#ffffff',
+                  padding: '6px 20px',
+                  borderRadius: '12px',
+                  fontSize: '44px',
+                  marginTop: '8px',
+                  transform: 'rotate(-1deg)',
                 }}
               >
-                {item.icon}
-              </div>
+                in cracking interviews
+              </span>
+            </h1>
+
+            <p
+              style={{
+                fontSize: '18px',
+                lineHeight: 1.7,
+                color: '#475569',
+                marginBottom: 36,
+                maxWidth: 540,
+                fontWeight: 500,
+              }}
+            >
+              Simulate high-stakes technical & behavioral video calls with our adaptive AI Interviewer. Get instant real-time evaluation, domain scoring, and competency reports.
+            </p>
+
+            <div style={{ display: 'flex', gap: 16, alignItems: 'center', flexWrap: 'wrap' }}>
+              <Link
+                href="/new"
+                className="btn-primary"
+                style={{ padding: '16px 36px', fontSize: '16px', borderRadius: '999px' }}
+              >
+                Get HirePro AI <ArrowRight size={18} />
+              </Link>
+              <Link
+                href="/register"
+                className="btn-ghost"
+                style={{ padding: '15px 30px', fontSize: '15px', borderRadius: '999px', background: '#ffffff' }}
+              >
+                Candidate Sign Up
+              </Link>
+            </div>
+
+            {/* Quick stats badges */}
+            <div style={{ display: 'flex', gap: 24, marginTop: 44, paddingTop: 28, borderTop: '1px solid #e2d9cd' }}>
               <div>
-                <div style={{ fontSize: '12px', color: 'var(--accent-purple)', fontWeight: 700, marginBottom: '6px', letterSpacing: '0.08em' }}>
-                  STEP {item.step}
-                </div>
-                <h3 style={{ fontSize: '20px', fontWeight: 700, marginBottom: '8px' }}>{item.title}</h3>
-                <p style={{ color: 'var(--text-secondary)', lineHeight: 1.7, fontSize: '15px' }}>{item.desc}</p>
+                <div style={{ fontSize: 24, fontWeight: 800, color: '#0f172a' }}>100,000+</div>
+                <div style={{ fontSize: 13, color: '#64748b', fontWeight: 600 }}>Assessments Completed</div>
+              </div>
+              <div style={{ width: 1, background: '#e2d9cd' }} />
+              <div>
+                <div style={{ fontSize: 24, fontWeight: 800, color: '#0f172a' }}>98.4%</div>
+                <div style={{ fontSize: 13, color: '#64748b', fontWeight: 600 }}>Evaluation Accuracy</div>
+              </div>
+              <div style={{ width: 1, background: '#e2d9cd' }} />
+              <div>
+                <div style={{ fontSize: 24, fontWeight: 800, color: '#0f172a' }}>Zero</div>
+                <div style={{ fontSize: 13, color: '#64748b', fontWeight: 600 }}>LLM Provider Latency</div>
               </div>
             </div>
-          ))}
+          </div>
+
+          {/* Right Column: High Quality Graphic / Candidate Illustration */}
+          <div style={{ position: 'relative' }}>
+            <div
+              style={{
+                background: '#ffffff',
+                borderRadius: 28,
+                padding: 32,
+                border: '1px solid #e2d9cd',
+                boxShadow: '0 20px 50px rgba(15, 23, 42, 0.08)',
+                position: 'relative',
+              }}
+            >
+              {/* Card Title */}
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 20 }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                  <div style={{ width: 12, height: 12, borderRadius: '50%', background: '#ef4444' }} />
+                  <div style={{ width: 12, height: 12, borderRadius: '50%', background: '#f59e0b' }} />
+                  <div style={{ width: 12, height: 12, borderRadius: '50%', background: '#10b981' }} />
+                </div>
+                <span style={{ fontSize: 12, fontWeight: 700, color: '#64748b' }}>HirePro Live Call Room</span>
+              </div>
+
+              {/* Mock Screen Content */}
+              <div
+                style={{
+                  height: 280,
+                  background: '#1e1b4b',
+                  borderRadius: 16,
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  color: 'white',
+                  textAlign: 'center',
+                  padding: 24,
+                  position: 'relative',
+                  overflow: 'hidden',
+                }}
+              >
+                <div
+                  style={{
+                    width: 80,
+                    height: 80,
+                    borderRadius: '50%',
+                    background: '#f59e0b',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    marginBottom: 16,
+                    boxShadow: '0 0 30px rgba(245, 158, 11, 0.5)',
+                  }}
+                >
+                  <Bot size={40} color="#0f172a" />
+                </div>
+                <h3 style={{ fontSize: 18, fontWeight: 700 }}>Alex — Senior AI Hiring Partner</h3>
+                <p style={{ fontSize: 13, color: '#cbd5e1', marginTop: 4 }}>"Tell me about a complex technical architecture you led recently."</p>
+
+                {/* Subtitle bar */}
+                <div
+                  style={{
+                    position: 'absolute',
+                    bottom: 12,
+                    left: 16,
+                    right: 16,
+                    background: 'rgba(0,0,0,0.6)',
+                    padding: '8px 14px',
+                    borderRadius: 8,
+                    fontSize: 12,
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'space-between',
+                  }}
+                >
+                  <span style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+                    <Mic size={14} color="#10b981" /> Candidate Microphone Active
+                  </span>
+                  <span style={{ background: '#ef4444', padding: '2px 8px', borderRadius: 4, fontSize: 10, fontWeight: 800 }}>LIVE</span>
+                </div>
+              </div>
+
+              {/* Floating Feature Tags */}
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12, marginTop: 16 }}>
+                <div style={{ background: '#fdfbf7', padding: '12px 16px', borderRadius: 12, border: '1px solid #e2d9cd', display: 'flex', alignItems: 'center', gap: 10 }}>
+                  <ShieldCheck size={20} color="#f59e0b" />
+                  <div>
+                    <div style={{ fontSize: 13, fontWeight: 700, color: '#0f172a' }}>Multi-LLM Chain</div>
+                    <div style={{ fontSize: 11, color: '#64748b' }}>Anthropic, Groq, Gemini</div>
+                  </div>
+                </div>
+                <div style={{ background: '#fdfbf7', padding: '12px 16px', borderRadius: 12, border: '1px solid #e2d9cd', display: 'flex', alignItems: 'center', gap: 10 }}>
+                  <BarChart3 size={20} color="#2563eb" />
+                  <div>
+                    <div style={{ fontSize: 13, fontWeight: 700, color: '#0f172a' }}>Instant Scoring</div>
+                    <div style={{ fontSize: 11, color: '#64748b' }}>Detailed PDF Reports</div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
         </div>
       </section>
 
-      {/* Features grid */}
-      <section style={{ padding: '60px 24px 100px', maxWidth: '1100px', margin: '0 auto' }}>
-        <h2
-          style={{
-            fontSize: '32px',
-            fontWeight: 700,
-            textAlign: 'center',
-            marginBottom: '48px',
-            letterSpacing: '-0.02em',
-          }}
-        >
-          Everything You Need to Prepare
-        </h2>
+      {/* Feature Showcase Banner */}
+      <section style={{ background: '#ffffff', padding: '60px 32px', borderTop: '1px solid #e2d9cd', borderBottom: '1px solid #e2d9cd' }}>
+        <div style={{ maxWidth: 1280, margin: '0 auto', textAlign: 'center' }}>
+          <h2 style={{ fontSize: 32, fontWeight: 800, color: '#0f172a', marginBottom: 12 }}>
+            Unleashing Fearless Hiring & Interviewing
+          </h2>
+          <p style={{ color: '#64748b', fontSize: 16, maxWidth: 640, margin: '0 auto 48px' }}>
+            Built for enterprise candidates and hiring teams to deliver structured, bias-free, high-fidelity technical assessments.
+          </p>
 
-        <div
-          style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))',
-            gap: '20px',
-          }}
-        >
-          {features.map((feature) => (
-            <div key={feature.title} className="glass-card" style={{ padding: '28px' }}>
-              <div style={{ fontSize: '32px', marginBottom: '16px' }}>{feature.icon}</div>
-              <h3 style={{ fontSize: '17px', fontWeight: 700, marginBottom: '10px' }}>{feature.title}</h3>
-              <p style={{ color: 'var(--text-secondary)', fontSize: '14px', lineHeight: 1.7 }}>
-                {feature.desc}
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: 28 }}>
+            
+            <div style={{ background: '#faf5ef', padding: 32, borderRadius: 20, border: '1px solid #e2d9cd', textAlign: 'left' }}>
+              <div style={{ width: 48, height: 48, borderRadius: 14, background: '#fef3c7', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 20 }}>
+                <Mic size={24} color="#f59e0b" />
+              </div>
+              <h3 style={{ fontSize: 18, fontWeight: 800, color: '#0f172a', marginBottom: 10 }}>
+                Real-Time Voice Call
+              </h3>
+              <p style={{ color: '#475569', fontSize: 14, lineHeight: 1.6 }}>
+                Full duplex audio interaction with adaptive Speech-to-Text and low-latency response models.
               </p>
             </div>
-          ))}
+
+            <div style={{ background: '#faf5ef', padding: 32, borderRadius: 20, border: '1px solid #e2d9cd', textAlign: 'left' }}>
+              <div style={{ width: 48, height: 48, borderRadius: 14, background: '#dbeafe', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 20 }}>
+                <FileCheck2 size={24} color="#2563eb" />
+              </div>
+              <h3 style={{ fontSize: 18, fontWeight: 800, color: '#0f172a', marginBottom: 10 }}>
+                Resume & Syllabus Context
+              </h3>
+              <p style={{ color: '#475569', fontSize: 14, lineHeight: 1.6 }}>
+                Upload your PDF resume or job description to generate tailored questions matching exact domain requirements.
+              </p>
+            </div>
+
+            <div style={{ background: '#faf5ef', padding: 32, borderRadius: 20, border: '1px solid #e2d9cd', textAlign: 'left' }}>
+              <div style={{ width: 48, height: 48, borderRadius: 14, background: '#d1fae5', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 20 }}>
+                <Award size={24} color="#059669" />
+              </div>
+              <h3 style={{ fontSize: 18, fontWeight: 800, color: '#0f172a', marginBottom: 10 }}>
+                Competency Reports
+              </h3>
+              <p style={{ color: '#475569', fontSize: 14, lineHeight: 1.6 }}>
+                Receive immediate overall scores, category radar breakdowns, strengths, and actionable feedback post-call.
+              </p>
+            </div>
+
+          </div>
         </div>
       </section>
-
-      {/* CTA */}
-      <section
-        style={{
-          padding: '80px 24px',
-          textAlign: 'center',
-          background: 'linear-gradient(180deg, transparent, rgba(139,92,246,0.05))',
-          borderTop: '1px solid var(--border)',
-        }}
-      >
-        <h2 style={{ fontSize: '40px', fontWeight: 800, marginBottom: '16px', letterSpacing: '-0.03em' }}>
-          Ready to practice?
-        </h2>
-        <p style={{ color: 'var(--text-secondary)', fontSize: '16px', marginBottom: '40px' }}>
-          No sign-up required. Just upload and start.
-        </p>
-        <Link href="/new" className="btn-primary" style={{ padding: '16px 40px', fontSize: '17px' }}>
-          🎙️ Start Your First Interview
-        </Link>
-      </section>
-
-      {/* Footer */}
-      <footer
-        style={{
-          padding: '24px',
-          textAlign: 'center',
-          color: 'var(--text-muted)',
-          fontSize: '13px',
-          borderTop: '1px solid var(--border)',
-        }}
-      >
-        interviewr.ai — AI Mock Interview Platform &nbsp;·&nbsp; Powered by Claude AI
-      </footer>
     </div>
   );
 }
