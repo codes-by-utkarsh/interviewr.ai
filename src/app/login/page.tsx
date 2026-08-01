@@ -50,123 +50,85 @@ export default function LoginPage() {
   };
 
   return (
-    <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', background: '#faf5ef' }}>
+    <div className="min-h-screen flex flex-col bg-[#faf5ef]">
       <Navbar />
 
-      <main style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '40px 20px' }}>
-        <div
-          style={{
-            maxWidth: 460,
-            width: '100%',
-            background: '#ffffff',
-            borderRadius: 24,
-            padding: '40px 36px',
-            boxShadow: '0 10px 40px rgba(15, 23, 42, 0.06)',
-            border: '1px solid #e2d9cd',
-          }}
-        >
+      <main className="flex-1 flex items-center justify-center p-4 md:p-10">
+        <div className="w-full max-w-[460px] bg-white rounded-3xl p-6 md:p-9 shadow-[0_10px_40px_rgba(15,23,42,0.06)] border border-[#e2d9cd]">
           {/* Header */}
-          <div style={{ textAlign: 'center', marginBottom: 32 }}>
-            <div style={{ display: 'inline-flex', alignItems: 'center', gap: 6, background: '#fef3c7', color: '#92400e', padding: '6px 14px', borderRadius: 999, fontSize: 12, fontWeight: 700, marginBottom: 14 }}>
+          <div className="text-center mb-8">
+            <div className="inline-flex items-center gap-1.5 bg-[#fef3c7] text-[#92400e] px-3.5 py-1.5 rounded-full text-xs font-bold mb-3.5">
               <ShieldCheck size={14} /> interviewr.ai Platform by Utkarsh
             </div>
-            <h1 style={{ fontSize: 28, fontWeight: 800, color: '#0f172a', letterSpacing: '-0.02em', marginBottom: 8 }}>
+            <h1 className="text-2xl md:text-[28px] font-extrabold text-[#0f172a] tracking-tight mb-2">
               Welcome back
             </h1>
-            <p style={{ color: '#475569', fontSize: 14, lineHeight: 1.6 }}>
+            <p className="text-[#475569] text-sm leading-relaxed">
               Sign in to access your interviewr.ai assessments and performance analytics.
             </p>
           </div>
 
           {/* Error / Success Notifications */}
           {error && (
-            <div
-              style={{
-                background: '#ffe4e6',
-                border: '1px solid #fecdd3',
-                borderRadius: '10px',
-                padding: '12px 16px',
-                color: '#9f1239',
-                fontSize: '14px',
-                marginBottom: 20,
-                display: 'flex',
-                alignItems: 'center',
-                gap: 8,
-              }}
-            >
-              <AlertCircle size={18} /> {error}
+            <div className="bg-[#ffe4e6] border border-[#fecdd3] rounded-xl px-4 py-3 text-[#9f1239] text-sm mb-5 flex items-center gap-2">
+              <AlertCircle size={18} className="shrink-0" /> {error}
             </div>
           )}
 
           {successMsg && (
-            <div
-              style={{
-                background: '#d1fae5',
-                border: '1px solid #a7f3d0',
-                borderRadius: '10px',
-                padding: '12px 16px',
-                color: '#065f46',
-                fontSize: '14px',
-                marginBottom: 20,
-                display: 'flex',
-                alignItems: 'center',
-                gap: 8,
-              }}
-            >
-              <CheckCircle2 size={18} /> {successMsg}
+            <div className="bg-[#d1fae5] border border-[#a7f3d0] rounded-xl px-4 py-3 text-[#065f46] text-sm mb-5 flex items-center gap-2">
+              <CheckCircle2 size={18} className="shrink-0" /> {successMsg}
             </div>
           )}
 
           {/* Form */}
-          <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
+          <form onSubmit={handleSubmit} className="flex flex-col gap-5">
             <div>
-              <label style={{ display: 'block', fontSize: 13, fontWeight: 700, color: '#0f172a', marginBottom: 8 }}>
+              <label className="block text-[13px] font-bold text-[#0f172a] mb-2">
                 Email Address
               </label>
-              <div style={{ position: 'relative' }}>
+              <div className="relative">
                 <input
                   type="email"
                   required
                   placeholder="candidate@company.com"
-                  className="input-field"
-                  style={{ paddingLeft: 42 }}
+                  className="input-field pl-11"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                 />
-                <Mail size={18} style={{ position: 'absolute', left: 14, top: '50%', transform: 'translateY(-50%)', color: '#64748b' }} />
+                <Mail size={18} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[#64748b]" />
               </div>
             </div>
 
             <div>
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 8 }}>
-                <label style={{ fontSize: 13, fontWeight: 700, color: '#0f172a' }}>
+              <div className="flex justify-between items-center mb-2">
+                <label className="text-[13px] font-bold text-[#0f172a]">
                   Password
                 </label>
-                <a href="#" style={{ fontSize: 12, color: '#f59e0b', fontWeight: 700, textDecoration: 'none' }}>
+                <a href="#" className="text-xs text-[#f59e0b] font-bold no-underline hover:underline">
                   Forgot password?
                 </a>
               </div>
-              <div style={{ position: 'relative' }}>
+              <div className="relative">
                 <input
                   type="password"
                   required
                   placeholder="••••••••••••"
-                  className="input-field"
-                  style={{ paddingLeft: 42 }}
+                  className="input-field pl-11"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                 />
-                <Lock size={18} style={{ position: 'absolute', left: 14, top: '50%', transform: 'translateY(-50%)', color: '#64748b' }} />
+                <Lock size={18} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[#64748b]" />
               </div>
             </div>
 
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-              <label style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: 13, color: '#475569', cursor: 'pointer' }}>
+            <div className="flex items-center justify-between">
+              <label className="flex items-center gap-2 text-[13px] text-[#475569] cursor-pointer">
                 <input
                   type="checkbox"
                   checked={remember}
                   onChange={(e) => setRemember(e.target.checked)}
-                  style={{ accentColor: '#f59e0b', width: 16, height: 16 }}
+                  className="accent-[#f59e0b] w-4 h-4"
                 />
                 Keep me signed in
               </label>
@@ -175,16 +137,15 @@ export default function LoginPage() {
             <button
               type="submit"
               disabled={loading}
-              className="btn-navy"
-              style={{ width: '100%', justifyContent: 'center', padding: '14px', fontSize: 15 }}
+              className="btn-navy w-full justify-center p-3.5 text-[15px]"
             >
               {loading ? 'Verifying with Supabase...' : 'Sign In with Supabase'} <ArrowRight size={18} />
             </button>
           </form>
 
-          <div style={{ marginTop: 28, paddingTop: 24, borderTop: '1px solid #e2d9cd', textAlign: 'center', fontSize: 14, color: '#475569' }}>
+          <div className="mt-7 pt-6 border-t border-[#e2d9cd] text-center text-sm text-[#475569]">
             Don't have an assessment account?{' '}
-            <Link href="/register" style={{ color: '#f59e0b', fontWeight: 700, textDecoration: 'none' }}>
+            <Link href="/register" className="text-[#f59e0b] font-bold no-underline hover:underline">
               Register candidate profile
             </Link>
           </div>

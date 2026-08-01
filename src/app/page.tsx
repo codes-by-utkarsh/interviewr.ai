@@ -14,262 +14,162 @@ import {
 
 export default function HomePage() {
   return (
-    <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', background: '#faf5ef' }}>
+    <div className="min-h-screen flex flex-col bg-[#faf5ef]">
       <Navbar />
 
       {/* Hero Section matching clean corporate layout */}
-      <section style={{ padding: '60px 32px 80px', maxWidth: 1280, margin: '0 auto', width: '100%' }}>
-        <div style={{ display: 'grid', gridTemplateColumns: '1.1fr 0.9fr', gap: 48, alignItems: 'center' }}>
+      <section className="px-4 py-12 md:px-8 md:py-20 max-w-7xl mx-auto w-full">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           
           {/* Left Column */}
-          <div>
-            <div
-              style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: 8,
-                background: '#ffffff',
-                border: '1px solid #e2d9cd',
-                padding: '8px 18px',
-                borderRadius: 999,
-                fontSize: 13,
-                fontWeight: 700,
-                color: '#0f172a',
-                marginBottom: 28,
-                boxShadow: '0 2px 8px rgba(0,0,0,0.03)',
-              }}
-            >
+          <div className="order-2 lg:order-1">
+            <div className="inline-flex items-center gap-2 bg-white border border-[#e2d9cd] px-4 py-2 rounded-full text-xs md:text-sm font-bold text-[#0f172a] mb-7 shadow-sm">
               <Sparkles size={16} color="#f59e0b" /> interviewr.ai by Utkarsh
             </div>
 
-            <h1
-              style={{
-                fontSize: '60px',
-                fontWeight: 800,
-                color: '#0f172a',
-                lineHeight: 1.1,
-                letterSpacing: '-0.03em',
-                marginBottom: 24,
-                fontFamily: 'Plus Jakarta Sans, sans-serif',
-              }}
-            >
+            <h1 className="text-5xl md:text-6xl lg:text-[60px] font-extrabold text-[#0f172a] leading-tight tracking-tight mb-6 font-['Plus_Jakarta_Sans',sans-serif]">
               FEARLESS <br />
-              <span
-                style={{
-                  display: 'inline-block',
-                  background: '#1e1b4b',
-                  color: '#ffffff',
-                  padding: '6px 20px',
-                  borderRadius: '12px',
-                  fontSize: '44px',
-                  marginTop: '8px',
-                  transform: 'rotate(-1deg)',
-                }}
-              >
+              <span className="inline-block bg-[#1e1b4b] text-white px-5 py-2 rounded-xl text-3xl md:text-[44px] mt-2 -rotate-1">
                 in cracking interviews
               </span>
             </h1>
 
-            <p
-              style={{
-                fontSize: '18px',
-                lineHeight: 1.7,
-                color: '#475569',
-                marginBottom: 36,
-                maxWidth: 540,
-                fontWeight: 500,
-              }}
-            >
+            <p className="text-base md:text-lg leading-relaxed text-[#475569] mb-9 max-w-xl font-medium">
               Simulate high-stakes technical & behavioral video calls with our adaptive AI Interviewer. Get instant real-time evaluation, domain scoring, and competency reports.
             </p>
 
-            <div style={{ display: 'flex', gap: 16, alignItems: 'center', flexWrap: 'wrap' }}>
+            <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center">
               <Link
                 href="/new"
-                className="btn-primary"
-                style={{ padding: '16px 36px', fontSize: '16px', borderRadius: '999px' }}
+                className="btn-primary w-full sm:w-auto justify-center py-4 px-9 text-base rounded-full"
               >
                 Get interviewr.ai <ArrowRight size={18} />
               </Link>
               <Link
                 href="/register"
-                className="btn-ghost"
-                style={{ padding: '15px 30px', fontSize: '15px', borderRadius: '999px', background: '#ffffff' }}
+                className="btn-ghost w-full sm:w-auto justify-center py-3.5 px-8 text-[15px] rounded-full bg-white"
               >
                 Candidate Sign Up
               </Link>
             </div>
 
             {/* Quick stats badges */}
-            <div style={{ display: 'flex', gap: 24, marginTop: 44, paddingTop: 28, borderTop: '1px solid #e2d9cd' }}>
+            <div className="flex flex-col sm:flex-row gap-6 sm:gap-8 mt-11 pt-7 border-t border-[#e2d9cd]">
               <div>
-                <div style={{ fontSize: 24, fontWeight: 800, color: '#0f172a' }}>100,000+</div>
-                <div style={{ fontSize: 13, color: '#64748b', fontWeight: 600 }}>Assessments Completed</div>
+                <div className="text-2xl font-extrabold text-[#0f172a]">100,000+</div>
+                <div className="text-xs text-[#64748b] font-semibold mt-1">Assessments Completed</div>
               </div>
-              <div style={{ width: 1, background: '#e2d9cd' }} />
+              <div className="hidden sm:block w-[1px] bg-[#e2d9cd]"></div>
               <div>
-                <div style={{ fontSize: 24, fontWeight: 800, color: '#0f172a' }}>98.4%</div>
-                <div style={{ fontSize: 13, color: '#64748b', fontWeight: 600 }}>Evaluation Accuracy</div>
+                <div className="text-2xl font-extrabold text-[#0f172a]">98.4%</div>
+                <div className="text-xs text-[#64748b] font-semibold mt-1">Evaluation Accuracy</div>
               </div>
-              <div style={{ width: 1, background: '#e2d9cd' }} />
+              <div className="hidden sm:block w-[1px] bg-[#e2d9cd]"></div>
               <div>
-                <div style={{ fontSize: 24, fontWeight: 800, color: '#0f172a' }}>Zero</div>
-                <div style={{ fontSize: 13, color: '#64748b', fontWeight: 600 }}>LLM Provider Latency</div>
+                <div className="text-2xl font-extrabold text-[#0f172a]">Zero</div>
+                <div className="text-xs text-[#64748b] font-semibold mt-1">LLM Provider Latency</div>
               </div>
             </div>
           </div>
 
           {/* Right Column */}
-          <div style={{ position: 'relative' }}>
-            <div
-              style={{
-                background: '#ffffff',
-                borderRadius: 28,
-                padding: 32,
-                border: '1px solid #e2d9cd',
-                boxShadow: '0 20px 50px rgba(15, 23, 42, 0.08)',
-                position: 'relative',
-              }}
-            >
+          <div className="relative order-1 lg:order-2">
+            <div className="bg-white rounded-3xl p-5 md:p-8 border border-[#e2d9cd] shadow-[0_20px_50px_rgba(15,23,42,0.08)] relative">
               {/* Card Title */}
-              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 20 }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-                  <div style={{ width: 12, height: 12, borderRadius: '50%', background: '#ef4444' }} />
-                  <div style={{ width: 12, height: 12, borderRadius: '50%', background: '#f59e0b' }} />
-                  <div style={{ width: 12, height: 12, borderRadius: '50%', background: '#10b981' }} />
+              <div className="flex items-center justify-between mb-5">
+                <div className="flex items-center gap-2">
+                  <div className="w-3 h-3 rounded-full bg-red-500"></div>
+                  <div className="w-3 h-3 rounded-full bg-amber-500"></div>
+                  <div className="w-3 h-3 rounded-full bg-emerald-500"></div>
                 </div>
-                <span style={{ fontSize: 12, fontWeight: 700, color: '#64748b' }}>interviewr.ai Live Call Room</span>
+                <span className="text-xs font-bold text-[#64748b]">interviewr.ai Live Call Room</span>
               </div>
 
               {/* Mock Screen Content */}
-              <div
-                style={{
-                  height: 280,
-                  background: '#1e1b4b',
-                  borderRadius: 16,
-                  display: 'flex',
-                  flexDirection: 'column',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  color: 'white',
-                  textAlign: 'center',
-                  padding: 24,
-                  position: 'relative',
-                  overflow: 'hidden',
-                }}
-              >
-                <div
-                  style={{
-                    width: 80,
-                    height: 80,
-                    borderRadius: '50%',
-                    background: '#f59e0b',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    marginBottom: 16,
-                    boxShadow: '0 0 30px rgba(245, 158, 11, 0.5)',
-                  }}
-                >
-                  <Bot size={40} color="#0f172a" />
+              <div className="h-64 md:h-72 bg-[#1e1b4b] rounded-2xl flex flex-col items-center justify-center text-white text-center p-6 relative overflow-hidden">
+                <div className="w-16 h-16 md:w-20 md:h-20 rounded-full bg-amber-500 flex items-center justify-center mb-4 shadow-[0_0_30px_rgba(245,158,11,0.5)]">
+                  <Bot size={32} className="w-8 h-8 md:w-10 md:h-10 text-[#0f172a]" />
                 </div>
-                <h3 style={{ fontSize: 18, fontWeight: 700 }}>Alex — Senior AI Hiring Partner</h3>
-                <p style={{ fontSize: 13, color: '#cbd5e1', marginTop: 4 }}>"Tell me about a complex technical architecture you led recently."</p>
+                <h3 className="text-base md:text-lg font-bold">Alex — Senior AI Hiring Partner</h3>
+                <p className="text-xs md:text-[13px] text-slate-300 mt-1 px-4">"Tell me about a complex technical architecture you led recently."</p>
 
                 {/* Subtitle bar */}
-                <div
-                  style={{
-                    position: 'absolute',
-                    bottom: 12,
-                    left: 16,
-                    right: 16,
-                    background: 'rgba(0,0,0,0.6)',
-                    padding: '8px 14px',
-                    borderRadius: 8,
-                    fontSize: 12,
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'space-between',
-                  }}
-                >
-                  <span style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-                    <Mic size={14} color="#10b981" /> Candidate Microphone Active
+                <div className="absolute bottom-3 left-3 right-3 bg-black/60 px-3 py-2 rounded-lg text-[10px] md:text-xs flex items-center justify-between">
+                  <span className="flex items-center gap-1.5 truncate mr-2">
+                    <Mic size={12} className="text-emerald-500 shrink-0" /> Candidate Microphone Active
                   </span>
-                  <span style={{ background: '#ef4444', padding: '2px 8px', borderRadius: 4, fontSize: 10, fontWeight: 800 }}>LIVE</span>
+                  <span className="bg-red-500 px-2 py-0.5 rounded text-[9px] md:text-[10px] font-extrabold shrink-0">LIVE</span>
                 </div>
               </div>
 
               {/* Floating Feature Tags */}
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12, marginTop: 16 }}>
-                <div style={{ background: '#fdfbf7', padding: '12px 16px', borderRadius: 12, border: '1px solid #e2d9cd', display: 'flex', alignItems: 'center', gap: 10 }}>
-                  <ShieldCheck size={20} color="#f59e0b" />
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-4">
+                <div className="bg-[#fdfbf7] p-3 rounded-xl border border-[#e2d9cd] flex items-center gap-2.5">
+                  <ShieldCheck size={20} className="text-amber-500 shrink-0" />
                   <div>
-                    <div style={{ fontSize: 13, fontWeight: 700, color: '#0f172a' }}>Multi-LLM Chain</div>
-                    <div style={{ fontSize: 11, color: '#64748b' }}>Anthropic, Groq, Gemini</div>
+                    <div className="text-[13px] font-bold text-[#0f172a] leading-tight">Multi-LLM Chain</div>
+                    <div className="text-[11px] text-[#64748b]">Anthropic, Groq, Gemini</div>
                   </div>
                 </div>
-                <div style={{ background: '#fdfbf7', padding: '12px 16px', borderRadius: 12, border: '1px solid #e2d9cd', display: 'flex', alignItems: 'center', gap: 10 }}>
-                  <BarChart3 size={20} color="#2563eb" />
+                <div className="bg-[#fdfbf7] p-3 rounded-xl border border-[#e2d9cd] flex items-center gap-2.5">
+                  <BarChart3 size={20} className="text-blue-600 shrink-0" />
                   <div>
-                    <div style={{ fontSize: 13, fontWeight: 700, color: '#0f172a' }}>Instant Scoring</div>
-                    <div style={{ fontSize: 11, color: '#64748b' }}>Detailed PDF Reports</div>
+                    <div className="text-[13px] font-bold text-[#0f172a] leading-tight">Instant Scoring</div>
+                    <div className="text-[11px] text-[#64748b]">Detailed PDF Reports</div>
                   </div>
                 </div>
               </div>
-
             </div>
           </div>
         </div>
       </section>
 
       {/* Feature Showcase Banner */}
-      <section style={{ background: '#ffffff', padding: '60px 32px', borderTop: '1px solid #e2d9cd', borderBottom: '1px solid #e2d9cd' }}>
-        <div style={{ maxWidth: 1280, margin: '0 auto', textAlign: 'center' }}>
-          <h2 style={{ fontSize: 32, fontWeight: 800, color: '#0f172a', marginBottom: 12 }}>
+      <section className="bg-white px-4 py-16 md:px-8 md:py-20 border-y border-[#e2d9cd]">
+        <div className="max-w-7xl mx-auto text-center">
+          <h2 className="text-3xl md:text-4xl font-extrabold text-[#0f172a] mb-3">
             Unleashing Fearless Hiring & Interviewing
           </h2>
-          <p style={{ color: '#64748b', fontSize: 16, maxWidth: 640, margin: '0 auto 48px' }}>
+          <p className="text-[#64748b] text-base md:text-lg max-w-2xl mx-auto mb-12">
             Built for enterprise candidates and hiring teams to deliver structured, bias-free, high-fidelity technical assessments.
           </p>
 
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: 28 }}>
-            
-            <div style={{ background: '#faf5ef', padding: 32, borderRadius: 20, border: '1px solid #e2d9cd', textAlign: 'left' }}>
-              <div style={{ width: 48, height: 48, borderRadius: 14, background: '#fef3c7', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 20 }}>
-                <Mic size={24} color="#f59e0b" />
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-7">
+            <div className="bg-[#faf5ef] p-6 md:p-8 rounded-2xl border border-[#e2d9cd] text-left">
+              <div className="w-12 h-12 rounded-xl bg-amber-100 flex items-center justify-center mb-5">
+                <Mic size={24} className="text-amber-500" />
               </div>
-              <h3 style={{ fontSize: 18, fontWeight: 800, color: '#0f172a', marginBottom: 10 }}>
+              <h3 className="text-lg font-extrabold text-[#0f172a] mb-2.5">
                 Real-Time Voice Call
               </h3>
-              <p style={{ color: '#475569', fontSize: 14, lineHeight: 1.6 }}>
+              <p className="text-[#475569] text-sm leading-relaxed">
                 Full duplex audio interaction with adaptive Speech-to-Text and low-latency response models.
               </p>
             </div>
 
-            <div style={{ background: '#faf5ef', padding: 32, borderRadius: 20, border: '1px solid #e2d9cd', textAlign: 'left' }}>
-              <div style={{ width: 48, height: 48, borderRadius: 14, background: '#dbeafe', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 20 }}>
-                <FileCheck2 size={24} color="#2563eb" />
+            <div className="bg-[#faf5ef] p-6 md:p-8 rounded-2xl border border-[#e2d9cd] text-left">
+              <div className="w-12 h-12 rounded-xl bg-blue-100 flex items-center justify-center mb-5">
+                <FileCheck2 size={24} className="text-blue-600" />
               </div>
-              <h3 style={{ fontSize: 18, fontWeight: 800, color: '#0f172a', marginBottom: 10 }}>
+              <h3 className="text-lg font-extrabold text-[#0f172a] mb-2.5">
                 Resume & Syllabus Context
               </h3>
-              <p style={{ color: '#475569', fontSize: 14, lineHeight: 1.6 }}>
+              <p className="text-[#475569] text-sm leading-relaxed">
                 Upload your PDF resume or job description to generate tailored questions matching exact domain requirements.
               </p>
             </div>
 
-            <div style={{ background: '#faf5ef', padding: 32, borderRadius: 20, border: '1px solid #e2d9cd', textAlign: 'left' }}>
-              <div style={{ width: 48, height: 48, borderRadius: 14, background: '#d1fae5', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 20 }}>
-                <Award size={24} color="#059669" />
+            <div className="bg-[#faf5ef] p-6 md:p-8 rounded-2xl border border-[#e2d9cd] text-left">
+              <div className="w-12 h-12 rounded-xl bg-emerald-100 flex items-center justify-center mb-5">
+                <Award size={24} className="text-emerald-600" />
               </div>
-              <h3 style={{ fontSize: 18, fontWeight: 800, color: '#0f172a', marginBottom: 10 }}>
+              <h3 className="text-lg font-extrabold text-[#0f172a] mb-2.5">
                 Competency Reports
               </h3>
-              <p style={{ color: '#475569', fontSize: 14, lineHeight: 1.6 }}>
+              <p className="text-[#475569] text-sm leading-relaxed">
                 Receive immediate overall scores, category radar breakdowns, strengths, and actionable feedback post-call.
               </p>
             </div>
-
           </div>
         </div>
       </section>
