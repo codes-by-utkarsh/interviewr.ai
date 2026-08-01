@@ -148,60 +148,87 @@ export function useVoiceInterview({ sessionId }: UseVoiceInterviewOptions) {
     }
   }, [sessionId, callTurn]);
 
-  // ── Start recording ───────────────────────────────────────────────────────
+  // ── Start recording (MediaRecorder → Web Speech API fallback) ───────────────
   const startRecording = useCallback(async () => {
     setMicError('');
-    try {
-      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-      const mr = new MediaRecorder(stream);
-      chunksRef.current = [];
-      mr.ondataavailable = (e) => { if (e.data.size > 0) chunksRef.current.push(e.data); };
-      mr.start(200);
-      mediaRecorderRef.current = mr;
-      setStatus('user_recording');
-    } catch {
-      setMicError('Mic access denied. Please allow microphone in browser settings.');
+
+    // ── Path A: MediaRecorder (Chrome, Firefox, Edge) ────────────────────────
+    if (typeof window !== 'undefined' && 'MediaRecorder' in window) {
+      try {
+        const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+        const mr = new MediaRecorder(stream);
+        chunksRef.current = [];
+        mr.ondataavailable = (e) => { if (e.data.size > 0) chunksRef.current.push(e.data); };
+        mr.start(200);
+        mediaRecorderRef.current = mr;
+        setStatus('user_recording');
+        return;
+      } catch {
+        setMicError('Mic access denied. Please allow microphone in browser settings.');
+        return;
+      }
     }
-  }, []);
+
+    // ── Path B: Web Speech API (Safari / no MediaRecorder) ──────────────────
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const win = window as any;
+    const SR = win.SpeechRecognition || win.webkitSpeechRecognition;
+    if (!SR) {
+      setMicError('Your browser does not support voice input. Please use the text field below.');
+      return;
+    }
+    const r = new SR();
+    r.lang = 'en-US';
+    r.continuous = false;
+    r.interimResults = true;
+    setStatus('user_recording');
+    setLiveCaption('Listening…');
+    r.onresult = (e: any) => {
+      const t = Array.from(e.results as SpeechRecognitionResultList)
+        .map((res: SpeechRecognitionResult) => res[0].transcript)
+        .join('');
+      setLiveCaption(t);
+    };
+    r.onend = async () => {
+      const finalCaption = liveCaption;
+      setLiveCaption('');
+      setStatus('processing');
+      if (finalCaption.trim()) {
+        await callTurn(finalCaption);
+      } else {
+        setStatus('user_turn');
+        setMicError("Couldn't hear you. Try again or type below.");
+      }
+    };
+    r.onerror = () => { setStatus('user_turn'); };
+    // Store ref so stopRecording can call r.stop()
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    (mediaRecorderRef as any).current = { isSpeechRecognition: true, stop: () => r.stop(), stream: { getTracks: () => [] } };
+    r.start();
+  }, [callTurn, liveCaption]);
 
   // ── Stop recording & transcribe ───────────────────────────────────────────
   const stopRecording = useCallback(async () => {
-    const mr = mediaRecorderRef.current;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const mr = mediaRecorderRef.current as any;
     if (!mr) return;
-    setStatus('processing');
 
+    // ── Path B: SpeechRecognition — just stop it, onend handles the rest ─────
+    if (mr.isSpeechRecognition) {
+      mr.stop();
+      return;
+    }
+
+    // ── Path A: MediaRecorder — collect blob and transcribe ──────────────────
+    setStatus('processing');
     await new Promise<void>((resolve) => {
       mr.onstop = () => resolve();
       mr.stop();
-      mr.stream.getTracks().forEach((t) => t.stop());
+      mr.stream.getTracks().forEach((t: MediaStreamTrack) => t.stop());
     });
 
     const blob = new Blob(chunksRef.current, { type: mr.mimeType || 'audio/webm' });
-
-    // Try server STT first
-    let transcript = await transcribeBlob(blob);
-
-    // Web Speech API fallback (if server STT unavailable)
-    if (!transcript) {
-      setLiveCaption('(Using browser speech recognition...)');
-      transcript = await new Promise<string>((resolve) => {
-        if (!('webkitSpeechRecognition' in window || 'SpeechRecognition' in window)) {
-          resolve('');
-          return;
-        }
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        const SR = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
-        const r = new SR();
-        r.lang = 'en-US';
-        r.onresult = (e: any) => resolve(e.results[0][0].transcript);
-        r.onerror = () => resolve('');
-        r.onend = () => resolve('');
-        r.start();
-        // timeout
-        setTimeout(() => { try { r.stop(); } catch {} }, 10000);
-      });
-    }
-
+    const transcript = await transcribeBlob(blob);
     setLiveCaption('');
 
     if (!transcript.trim()) {

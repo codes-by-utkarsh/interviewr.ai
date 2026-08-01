@@ -1,8 +1,6 @@
-import Anthropic from '@anthropic-ai/sdk';
-
-export const anthropic = new Anthropic({
-  apiKey: process.env.ANTHROPIC_API_KEY,
-});
+// Note: Anthropic client is instantiated lazily inside src/lib/llm.ts
+// to avoid crashing at module-load when ANTHROPIC_API_KEY is missing.
+// This file only exports the prompt builders.
 
 export const INTERVIEWER_SYSTEM_PROMPT = (resumeText: string, jdText: string) => `
 You are an experienced, professional technical interviewer conducting a live mock interview. You are warm but rigorous — like a real senior engineer or hiring manager, not a chatbot. Speak naturally, in short conversational turns (1-4 sentences), the way someone would actually talk on a call, not like you're writing an essay.
