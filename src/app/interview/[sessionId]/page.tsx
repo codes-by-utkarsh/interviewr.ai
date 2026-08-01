@@ -102,7 +102,7 @@ function MeetHeader({
         </div>
 
         <h1 style={{ fontSize: 16, fontWeight: 700, color: '#f8fafc', margin: 0 }}>
-          {roleTitle || 'HirePro AI Technical Evaluation Call'}
+          {roleTitle || 'interviewr.ai AI Technical Evaluation Call'}
         </h1>
       </div>
 

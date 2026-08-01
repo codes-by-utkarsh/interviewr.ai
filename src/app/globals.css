@@ -2,7 +2,7 @@
 @import "tailwindcss";
 
 :root {
-  /* HirePro Light / Warm Corporate Palette */
+  /* interviewr.ai by Utkarsh Light / Warm Palette */
   --bg-primary: #faf5ef;
   --bg-secondary: #f3ece4;
   --bg-card: #ffffff;
@@ -65,7 +65,7 @@ body {
   box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
 }
 
-/* HirePro Yellow Primary Button */
+/* Primary Yellow Button */
 .btn-primary {
   background: var(--brand-yellow);
   color: #0f172a;
@@ -95,7 +95,7 @@ body {
   cursor: not-allowed;
 }
 
-/* HirePro Navy Button */
+/* Corporate Navy Button */
 .btn-navy {
   background: var(--brand-navy);
   color: #ffffff;

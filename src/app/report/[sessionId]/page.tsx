@@ -243,7 +243,7 @@ export default function ReportPage() {
             )}
           </div>
           <h1 style={{ fontSize: '38px', fontWeight: 800, color: '#0f172a', letterSpacing: '-0.03em', marginBottom: '12px' }}>
-            HirePro Candidate Evaluation Report
+            interviewr.ai Candidate Evaluation Report
           </h1>
           <p style={{ color: '#475569', lineHeight: 1.7, fontSize: '16px' }}>
             {report.summary}

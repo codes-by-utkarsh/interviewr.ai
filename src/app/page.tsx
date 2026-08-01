@@ -7,12 +7,8 @@ import {
   Mic,
   Award,
   BarChart3,
-  CheckCircle2,
   ArrowRight,
   ShieldCheck,
-  Zap,
-  Users,
-  Target,
   FileCheck2
 } from 'lucide-react';
 
@@ -21,11 +17,11 @@ export default function HomePage() {
     <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', background: '#faf5ef' }}>
       <Navbar />
 
-      {/* Hero Section matching HirePro screenshot */}
+      {/* Hero Section matching clean corporate layout */}
       <section style={{ padding: '60px 32px 80px', maxWidth: 1280, margin: '0 auto', width: '100%' }}>
         <div style={{ display: 'grid', gridTemplateColumns: '1.1fr 0.9fr', gap: 48, alignItems: 'center' }}>
           
-          {/* Left Column: Typography matching screenshot */}
+          {/* Left Column */}
           <div>
             <div
               style={{
@@ -43,7 +39,7 @@ export default function HomePage() {
                 boxShadow: '0 2px 8px rgba(0,0,0,0.03)',
               }}
             >
-              <Sparkles size={16} color="#f59e0b" /> Powered by Enterprise AI Assessment Engine
+              <Sparkles size={16} color="#f59e0b" /> interviewr.ai by Utkarsh
             </div>
 
             <h1
@@ -93,7 +89,7 @@ export default function HomePage() {
                 className="btn-primary"
                 style={{ padding: '16px 36px', fontSize: '16px', borderRadius: '999px' }}
               >
-                Get HirePro AI <ArrowRight size={18} />
+                Get interviewr.ai <ArrowRight size={18} />
               </Link>
               <Link
                 href="/register"
@@ -123,7 +119,7 @@ export default function HomePage() {
             </div>
           </div>
 
-          {/* Right Column: High Quality Graphic / Candidate Illustration */}
+          {/* Right Column */}
           <div style={{ position: 'relative' }}>
             <div
               style={{
@@ -142,7 +138,7 @@ export default function HomePage() {
                   <div style={{ width: 12, height: 12, borderRadius: '50%', background: '#f59e0b' }} />
                   <div style={{ width: 12, height: 12, borderRadius: '50%', background: '#10b981' }} />
                 </div>
-                <span style={{ fontSize: 12, fontWeight: 700, color: '#64748b' }}>HirePro Live Call Room</span>
+                <span style={{ fontSize: 12, fontWeight: 700, color: '#64748b' }}>interviewr.ai Live Call Room</span>
               </div>
 
               {/* Mock Screen Content */}

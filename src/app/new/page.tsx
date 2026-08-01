@@ -63,7 +63,7 @@ export default function NewInterviewPage() {
         {/* Header */}
         <div style={{ marginBottom: '40px', textAlign: 'center' }}>
           <div className="badge badge-yellow" style={{ marginBottom: '16px', display: 'inline-flex' }}>
-            <Sparkles size={14} /> HirePro AI Evaluator Setup
+            <Sparkles size={14} /> interviewr.ai Evaluator Setup
           </div>
           <h1
             style={{
@@ -198,7 +198,7 @@ export default function NewInterviewPage() {
             >
               <Info size={20} color="#f59e0b" style={{ flexShrink: 0, marginTop: 2 }} />
               <div>
-                <strong style={{ fontWeight: 700 }}>Assessment Process:</strong> Clicking below launches a live 1:1 video call with Alex (HirePro AI Recruiter). Once completed, you will receive your full competency evaluation.
+                <strong style={{ fontWeight: 700 }}>Assessment Process:</strong> Clicking below launches a live 1:1 video call with Alex (interviewr.ai Senior AI Recruiter). Once completed, you will receive your full competency evaluation.
               </div>
             </div>
 

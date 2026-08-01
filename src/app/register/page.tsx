@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import Navbar from '@/components/Navbar';
-import { Mail, Lock, User, Briefcase, ArrowRight, ShieldCheck } from 'lucide-react';
+import { Mail, Lock, User, Briefcase, ArrowRight, ShieldCheck, AlertCircle, CheckCircle2 } from 'lucide-react';
 
 export default function RegisterPage() {
   const [name, setName] = useState('');
@@ -10,14 +10,41 @@ export default function RegisterPage() {
   const [role, setRole] = useState('Full Stack Software Engineer');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
+  const [successMsg, setSuccessMsg] = useState('');
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setError('');
+    setSuccessMsg('');
     setLoading(true);
-    setTimeout(() => {
+
+    try {
+      const res = await fetch('/api/auth/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, email, role, password }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        throw new Error(data.error || 'Registration failed');
+      }
+
+      // Store authenticated user in localStorage
+      if (data.user) {
+        localStorage.setItem('user', JSON.stringify(data.user));
+      }
+
+      setSuccessMsg('Account registered successfully in Supabase! Redirecting to setup...');
+      setTimeout(() => {
+        window.location.href = '/new';
+      }, 1000);
+    } catch (err: unknown) {
+      setError(err instanceof Error ? err.message : 'Registration failed');
       setLoading(false);
-      window.location.href = '/new';
-    }, 800);
+    }
   };
 
   return (
@@ -45,9 +72,48 @@ export default function RegisterPage() {
               Create your account
             </h1>
             <p style={{ color: '#475569', fontSize: 14, lineHeight: 1.6 }}>
-              Set up your profile to start AI-driven technical mock interviews and track hiring feedback.
+              Set up your profile to start AI-driven technical mock interviews and track hiring feedback in Supabase.
             </p>
           </div>
+
+          {/* Error / Success Notifications */}
+          {error && (
+            <div
+              style={{
+                background: '#ffe4e6',
+                border: '1px solid #fecdd3',
+                borderRadius: '10px',
+                padding: '12px 16px',
+                color: '#9f1239',
+                fontSize: '14px',
+                marginBottom: 20,
+                display: 'flex',
+                alignItems: 'center',
+                gap: 8,
+              }}
+            >
+              <AlertCircle size={18} /> {error}
+            </div>
+          )}
+
+          {successMsg && (
+            <div
+              style={{
+                background: '#d1fae5',
+                border: '1px solid #a7f3d0',
+                borderRadius: '10px',
+                padding: '12px 16px',
+                color: '#065f46',
+                fontSize: '14px',
+                marginBottom: 20,
+                display: 'flex',
+                alignItems: 'center',
+                gap: 8,
+              }}
+            >
+              <CheckCircle2 size={18} /> {successMsg}
+            </div>
+          )}
 
           {/* Form */}
           <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: 18 }}>
@@ -113,7 +179,7 @@ export default function RegisterPage() {
                 <input
                   type="password"
                   required
-                  placeholder="At least 8 characters"
+                  placeholder="At least 6 characters"
                   className="input-field"
                   style={{ paddingLeft: 42 }}
                   value={password}
@@ -129,7 +195,7 @@ export default function RegisterPage() {
               className="btn-primary"
               style={{ width: '100%', justifyContent: 'center', padding: '14px', fontSize: 15, marginTop: 8 }}
             >
-              {loading ? 'Creating Profile...' : 'Complete Registration'} <ArrowRight size={18} />
+              {loading ? 'Creating Profile in Supabase...' : 'Complete Registration'} <ArrowRight size={18} />
             </button>
           </form>
 
